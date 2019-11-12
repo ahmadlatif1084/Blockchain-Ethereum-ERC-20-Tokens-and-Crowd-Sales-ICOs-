@@ -1,0 +1,16 @@
+Truffle console
+// Setup & Smoke Test
+1)  DappToken.deployed().then(function(i){
+        token=i;
+    })
+2)  token.address
+3)  token.totalSupply().then(function(s){totalSupply=s;})
+4)  totalSupply.toNumber()
+
+Creating the ERC-20 Token Smart Contract
+
+1) web3.eth.getAccounts();
+2) var accounts = web3.eth.getAccounts().then(function(result){ accounts=result[0];});
+3) var accounts1 = web3.eth.getAccounts().then(function(result){ accounts1=result[1];});
+4)token.transfer(accounts1,1,{from:accounts})
+
