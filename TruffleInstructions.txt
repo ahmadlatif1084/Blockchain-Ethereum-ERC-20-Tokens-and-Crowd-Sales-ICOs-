@@ -14,3 +14,39 @@ Creating the ERC-20 Token Smart Contract
 3) var accounts1 = web3.eth.getAccounts().then(function(result){ accounts1=result[1];});
 4)token.transfer(accounts1,1,{from:accounts})
 
+Console Documentation
+
+1) DappToken.deployed().then(function(instance){tokenInstance=instance});
+2) tokenInstance
+3) tokenInstance.name()
+4) tokenInstance.symbol()
+5) tokenInstance.standard()
+6) tokenInstance.totalSupply().then(function(s){supply=s;})
+7) supply.toNumber()
+8) web3.eth.getAccounts();
+9) web3.eth.getAccounts().then(function(result){admin=result[0]});
+10) tokenInstance.balanceOf(admin).then(function(bal){balance=bal});
+11) balance.toNumber()
+12) web3.eth.getAccounts().then(function(result){accounts1=result[1]});
+13) receiver= accounts1;tokenInstance.transfer(receiver,1,{from:admin})
+14) tokenInstance.balanceOf(admin).then(function(bal){remainingbalanceadmin=bal});
+15) remainingbalanceadmin.toNumber()
+16) tokenInstance.balanceOf(receiver).then(function(bal){receivernewbal=bal});
+17) receivernewbal.toNumber();
+18) tokenInstance.approve(accounts1,100)
+19) tokenInstance.allowance(admin,accounts1).then(function(bal){allowancebal=bal})
+20) allowancebal.toNumber()
+21) web3.eth.getAccounts().then(function(result){fromAccount=result[2]});
+22) web3.eth.getAccounts().then(function(result){toAccount=result[3]});
+23) web3.eth.getAccounts().then(function(result){spendingAccount=result[4]});
+24) tokenInstance.transfer(fromAccount,100,{from:admin})
+25) tokenInstance.balanceOf(fromAccount).then(function(bal){fromaccountbal=bal})
+26) fromaccountbal.toNumber()
+27) tokenInstance.approve(spendingAccount,10,{from:fromAccount})
+28) tokenInstance.transferFrom(fromAccount,toAccount,10,{from:spendingAccount})
+29) tokenInstance.balanceOf(fromAccount).then(function(bal){fromAccountbal=bal})
+30) fromAccountbal.toNumber()
+31) tokenInstance.balanceOf(toAccount).then(function(bal){toAccountbal=bal})
+32) toAccountbal.toNumber()
+33) tokenInstance.allowance(fromAccount,spendingAccount).then(function(bal){allowanceremainbal=bal})
+34) allowanceremainbal.toNumber()
