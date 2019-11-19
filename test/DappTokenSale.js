@@ -13,7 +13,7 @@ contract('DappTokenSale',function(accounts){
     it('initializes the contract with the correct values', function() {
         return DappTokenSale.deployed().then(function(instance) {
           tokenSaleInstance = instance;
-          return tokenSaleInstance.address
+          return tokenSaleInstance.address;
         }).then(function(address) {
           assert.notEqual(address, 0x0, 'has contract address');
           return tokenSaleInstance.tokenContract();
@@ -36,7 +36,7 @@ contract('DappTokenSale',function(accounts){
         return tokenInstance.transfer(tokenSaleInstance.address, tokenAvailable, {from : admin});
         }).then(function(receipt){
         numberOfTokens = 10;
-        return tokenSaleInstance.buyTokens(numberOfTokens,{ from : buyer , value : numberOfTokens * tokenPrice})
+        return tokenSaleInstance.buyTokens(numberOfTokens,{ from : buyer , value : numberOfTokens * tokenPrice});
         }).then(function(receipt){
             assert.equal(receipt.logs.length, 1, 'triggers one event');
             assert.equal(receipt.logs[0].event, 'Sell', 'should be the "Sell" event');
@@ -59,5 +59,32 @@ contract('DappTokenSale',function(accounts){
             assert(error.message.indexOf('revert') >=0,'cannot purchase more tokens than available');
         });  
     });
+
+ it('ends token sale',function(){
+   return DappTokenSale.deployed().then(function(instance){
+     // grab token instance first
+  tokenSaleInstance = instance;
+  return DappTokenSale.deployed();
+   }).then(function(instance){
+     // Then grab token sale instance
+     tokenSaleInstance = instance;
+     // Try the end sale from account other than the admin
+     return tokenSaleInstance.endSale({from:buyer});
+   }).then(assert.fail).catch(function(error){
+     assert(error.message.indexOf('revert' >=0,'must be the admin to end sale'));
+     // End Sale as admin
+     return tokenSaleInstance.endSale({from:admin});
+   }).then(function(receipt){
+     // receipt
+     return tokenInstance.balanceOf(admin);
+   }).then(function(balance){
+     assert.equal(balance.toNumber(),999990,'returns all unsold dapp tokens to admin');
+     // Check that token price was reset when selfDestruct was called
+     return tokenSaleInstance.tokenPrice();
+   }).then(function(price){
+     assert.equal(price.toNumber(),0,'token price was reset');
+
+   });
+ });
 
 });
