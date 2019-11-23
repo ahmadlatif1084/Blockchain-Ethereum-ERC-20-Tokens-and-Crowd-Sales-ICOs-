@@ -6,7 +6,7 @@
     "directories": {
         "test": "test"
     },
-    "scripts":{
+    "scripts": {
         "dev": "lite-server"
     },
     "author": "Gregory",

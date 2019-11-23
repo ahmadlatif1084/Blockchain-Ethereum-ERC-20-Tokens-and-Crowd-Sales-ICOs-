@@ -59,4 +59,16 @@ Console Documentation
 1) DappTokenSale.deployed().then(function(instance){ tokenSaleInstance = instance;})
 2) tokenSaleInstance.address
 3) tokenSaleInstance.tokenContract()
-4) 
+
+Section 5
+// Purchasing the ERC-20 token
+1) truffle console
+2) DappTokenSale.deployed().then(function(i){tokenSale=i;});
+3) tokenSale
+4) DappToken.deployed().then(function(i){token=i;})
+5) tokensAvailable = 750000
+6) web3.eth.getAccounts().then(function(result){admin=result[0]})
+7) admin
+8) token.transfer(tokenSale.address,tokensAvailable,{from:admin})
+9) token.balanceOf(tokenSale.address)
+10) .exit

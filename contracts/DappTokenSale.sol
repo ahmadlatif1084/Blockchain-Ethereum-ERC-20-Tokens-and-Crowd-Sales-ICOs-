@@ -17,12 +17,12 @@ contract DappTokenSale {
     }
     // multiply
     function multiply(uint x,uint y) internal pure returns (uint z){
-        require(y == 0 || (z = x * y)/ y == x);
+        require(y == 0 || (z = x * y) / y == x,'multiple failed');
     }
     function buyTokens(uint256 _numberOfTokens) public payable {
-        require(msg.value == multiply(_numberOfTokens, tokenPrice));
-        require(tokenContract.balanceOf(address(this)) >= _numberOfTokens);
-        require(tokenContract.transfer(msg.sender, _numberOfTokens));
+        require(msg.value == multiply(_numberOfTokens, tokenPrice),'equal failed for buyTokens');
+        require(tokenContract.balanceOf(address(this)) >= _numberOfTokens,'check token contract balanceOf > numberoftokens');
+        require(tokenContract.transfer(msg.sender, _numberOfTokens),'transfer failed for buy tokens');
 
         tokensSold += _numberOfTokens;
 

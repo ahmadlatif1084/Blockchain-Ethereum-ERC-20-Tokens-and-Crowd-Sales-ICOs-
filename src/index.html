@@ -25,7 +25,7 @@
                 &nbsp;DAPP.
                 </p>
                 <br/>
-                <form role="form">
+                <form onSubmit="App.buyTokens(); return false;" role="form">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="number" class="form-control" id="numberofToken" name="number" value="1" min="1" pattern="[0-9]">
@@ -40,13 +40,11 @@
                     <div class="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100">
                         <p><span class="tokens-sold"></span>/<span class="tokens-available"></span>tokens sold</p>
                     <hr>
-                    <p id="accountAddress">
-
-                    </p>
                     </div>
                 </div>
+                <p id="accountAddress"></p>
             </div>
-        </div>s
+        </div>
     </div>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"> </script>
