@@ -72,3 +72,60 @@ Section 5
 8) token.transfer(tokenSale.address,tokensAvailable,{from:admin})
 9) token.balanceOf(tokenSale.address)
 10) .exit
+
+
+// Section Deployment
+
+=>brew tap ethereum/ethereum
+=>brew install ethereum
+gueth is installed.
+T-Max is a terminal multiplexer thats going to split my pains and manage sessions.
+tmux a -t dapp_u
+
+Different networks on ethereum.
+local network is Ganache.
+Test network is Rinkeby Test Network.
+=> geth --rinkeby --rpc --rpcapi="personal,eth,network,web3,net" --ipcpath 10:40 "~/Library/Ethereum/geth.ipc"
+
+=>geth attach
+To check geth sinking
+=> eth.syncing
+=> exit
+
+Create new account on rinkeby
+=> geth --rinkeby account new
+password: pakistan12
+
+https://faucet.rinkeby.io/
+https://rinkeby.etherscan.io/
+
+Faucet is a smart contract that essentially can dispense either.
+Fund amount from faucet into your account.
+
+=> eth.accounts
+=>eth.accounts[0]
+=>eth.getBalance(eth.accounts[0])
+Wei is the smallest denomination of ether.
+
+=>personal.unlockAccount(eth.accounts[0],null,1200)
+=>eth.syncing
+=>truffle migrate --reset --compile-all --network rinkeby
+1200 = seconds = 20 minutes.
+=> var admin= eth.accounts[0]
+=> var tokensAvailable= 750000
+=> tokensAvailable
+=> var tokenSaleAddress = 'address here'
+=> tokenSaleAddress
+
+# Describe
+=> var abi = 'json file'
+=> var tokenAddress= 'token address'
+=> var TokenContract = web3.eth.contract(abi)
+=> TokenContract // Web 3 object
+=> var tokenInstance = TokenContract.at(tokenAddress)
+=> tokenInstance  // deployed instance of contract on console
+=> tokenInstance.name()
+=> tokenInstance.address
+=> tokenInstance.transfer(tokenSaleAddress,tokensAvailable,{from:admin})
+=> tokenInstance.balanceOf(admin)
+=> tokenInstance.balanceOf(tokenSaleAddress)
